@@ -19,10 +19,7 @@ public class ToolTree {
     private Integer ccid;
     private String path;
     private Integer level;*/
+    private String value;//area类专用
     private List<ToolTree> children = new ArrayList<>();
 
-    public ToolTree(Integer id, String authName) {
-        this.id=id;
-        this.authName=authName;
-    }
 }

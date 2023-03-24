@@ -38,7 +38,7 @@ public class MovieTypeServiceImpl extends ServiceImpl<MovieTypeMapper, MovieType
     public List<ToolTree> getTypeChildTree(List<MovieType> list, Integer id) {
         List<ToolTree> list2=new ArrayList<>();
         for(MovieType movieType:list){
-            ToolTree typeTree =new ToolTree(null,null);
+            ToolTree typeTree =new ToolTree();
             if(Objects.equals(movieType.getCid(), id)){
                 typeTree.setId(movieType.getId());
                 typeTree.setAuthName(movieType.getType());
