@@ -5,6 +5,7 @@ import com.example.demo.entity.tool.PageInfo;
 import com.example.demo.entity.Role;
 import com.example.demo.service.AdminService;
 import com.example.demo.util.ResponseResult;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -55,7 +56,7 @@ public class AdminController extends BaseController{
      * @return new ResponseResult<>()
      */
     @PostMapping("show")
-    public ResponseResult getAdminListResult(@RequestBody PageInfo page) {
+    public ResponseResult<PageInfo<AdminEntity>> getAdminListResult(@RequestBody PageInfo<Null> page) {
         // 执行查询
         PageInfo<AdminEntity> data = adminService.getAdminList(page.getPagenum(), page.getPagesize(), page.getQuery());
         if(Objects.isNull(data)){

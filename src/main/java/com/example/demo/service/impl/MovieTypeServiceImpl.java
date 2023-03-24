@@ -2,7 +2,6 @@ package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.entity.MovieType;
-import com.example.demo.entity.Right;
 import com.example.demo.entity.tool.ToolTree;
 import com.example.demo.mapper.MovieTypeMapper;
 import com.example.demo.service.MovieTypeService;
@@ -22,7 +21,7 @@ public class MovieTypeServiceImpl extends ServiceImpl<MovieTypeMapper, MovieType
     @Override
     public List<ToolTree> getTypeTreeList() {
         List<MovieType> movieTypeList = movieTypeMapper.selectList(null);
-        List list=new ArrayList<>();
+        List<ToolTree> list=new ArrayList<>();
         for(MovieType movieType:movieTypeList){
             ToolTree typeTree =new ToolTree();
             if(movieType.getCid()==0){
@@ -36,11 +35,10 @@ public class MovieTypeServiceImpl extends ServiceImpl<MovieTypeMapper, MovieType
     }
 
     @Override
-    public List getTypeChildTree(List<MovieType> list, Integer id) {
-        List list2=new ArrayList<>();
+    public List<ToolTree> getTypeChildTree(List<MovieType> list, Integer id) {
+        List<ToolTree> list2=new ArrayList<>();
         for(MovieType movieType:list){
             ToolTree typeTree =new ToolTree(null,null);
-            System.out.println(typeTree.toString());
             if(Objects.equals(movieType.getCid(), id)){
                 typeTree.setId(movieType.getId());
                 typeTree.setAuthName(movieType.getType());

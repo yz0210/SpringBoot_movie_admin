@@ -30,7 +30,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper,Role> implements Rol
     @Override
     public List<RoleInfo> getRoleList() {
         List<Role> roleList =roleMapper.selectList(null);
-        List<RoleInfo> roleInfoList=new ArrayList();
+        List<RoleInfo> roleInfoList=new ArrayList<>();
 
         for(Role role:roleList){
             RoleInfo roleInfoTree=new RoleInfo();
@@ -62,9 +62,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper,Role> implements Rol
         queryWrapper.eq("id",roleId)
                 .select("rights");
         Role role=roleMapper.selectOne(queryWrapper);
-        List list=Arrays.asList(role.getRights().split(","));
+        List<String> list=Arrays.asList(role.getRights().split(","));
 
-        List arrList = new ArrayList(list);
+        List<String> arrList = new ArrayList<>(list);
         arrList.remove(rightId.toString());
         String newIdStr=String.join(",",arrList);
 

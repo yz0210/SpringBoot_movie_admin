@@ -21,7 +21,7 @@ public class MenuController extends BaseController{
 
 
     @GetMapping
-    public ResponseResult getMovieInfoList() {
+    public ResponseResult<List<MenuTree>> getMovieInfoList() {
         // 执行查询
         List<MenuTree> data= menuService.findMenuTree();
         //System.out.println(data);

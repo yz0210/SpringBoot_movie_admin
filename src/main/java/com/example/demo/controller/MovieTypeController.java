@@ -21,7 +21,7 @@ public class MovieTypeController extends BaseController{
     private MovieTypeService movieTypeService;
 
     @GetMapping("tree")
-    public ResponseResult getRightTree() {
+    public ResponseResult<List<ToolTree>> getRightTree() {
         // 执行查询
         List<ToolTree> data = movieTypeService.getTypeTreeList();
         if(Objects.isNull(data)){

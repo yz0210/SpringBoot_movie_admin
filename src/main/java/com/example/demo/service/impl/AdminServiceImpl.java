@@ -32,10 +32,6 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, AdminEntity> impl
     }
 
 
-    /**
-    *
-    *用户列表
-    * */
     @Override
     public PageInfo<AdminEntity> getAdminList(Long pagenum,Long pagesize,String query) {
         //System.out.println(query);
@@ -47,13 +43,11 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, AdminEntity> impl
         Page<AdminEntity> page1 = page(page, queryWrapper);
 
         List<AdminEntity> rows = page1.getRecords();
-
-        //System.out.println(rows);
-
         Long total=page1.getTotal();
-        PageInfo pageInfo=new PageInfo(rows,query,total,pagenum,pagesize);
 
-        return pageInfo;
+        //PageInfo<AdminEntity> pageInfo=new PageInfo<AdminEntity>(rows,query,total,pagenum,pagesize);
+
+        return new PageInfo<>(rows,query,total,pagenum,pagesize);
 
 
     }
@@ -89,9 +83,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, AdminEntity> impl
         UpdateWrapper<AdminEntity> updateWrapper=new UpdateWrapper<>();
         updateWrapper.eq("id",uid)
                      .set("role_name",name);
-        int flag=adminMapper.update(new AdminEntity(),updateWrapper);
 
-        return flag;
+        return adminMapper.update(new AdminEntity(),updateWrapper);
     }
 
     @Override
@@ -99,8 +92,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, AdminEntity> impl
         UpdateWrapper<AdminEntity> updateWrapper=new UpdateWrapper<>();
         updateWrapper.eq("id",id)
                 .set("mg_state",bool);
-        int flag=adminMapper.update(new AdminEntity(),updateWrapper);
-        return flag;
+        return adminMapper.update(new AdminEntity(),updateWrapper);
     }
 
 

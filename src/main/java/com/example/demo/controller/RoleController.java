@@ -19,7 +19,7 @@ public class RoleController extends BaseController{
     private RoleService roleService;
 
     @GetMapping("list")
-    public ResponseResult getRoleList() {
+    public ResponseResult<List<RoleInfo>> getRoleList() {
         // 执行查询
         List<RoleInfo> data = roleService.getRoleList();
         if(Objects.isNull(data))
@@ -29,21 +29,21 @@ public class RoleController extends BaseController{
 
 
     @PostMapping("/{roleId}/rights")
-    private ResponseResult getUpdateRoleResult(@RequestBody Role role , @PathVariable Integer roleId){
+    private ResponseResult<Integer> getUpdateRoleResult(@RequestBody Role role , @PathVariable Integer roleId){
 
         int flag=roleService.updateRoleRights(roleId,role.getRights());
         if(flag<=0)
-            return new ResponseResult<>(0,"upd err!",null);
-        return new ResponseResult<>(SUCCESS,"upd success!",null);
+            return new ResponseResult<>(0,"upd err!",flag);
+        return new ResponseResult<>(SUCCESS,"upd success!",flag);
     }
 
     @DeleteMapping ("/{roleId}/rights/{rightId}")
-    private ResponseResult getDelRoleRightResult(@PathVariable Integer roleId,@PathVariable Integer rightId){
+    private ResponseResult<Integer> getDelRoleRightResult(@PathVariable Integer roleId,@PathVariable Integer rightId){
 
         int flag=roleService.deleteRoleRights(roleId,rightId);
         if(flag<=0)
-            return new ResponseResult<>(0,"del err!",null);
-        return new ResponseResult<>(SUCCESS,"del success!",null);
+            return new ResponseResult<>(0,"del err!",flag);
+        return new ResponseResult<>(SUCCESS,"del success!",flag);
     }
 
 }

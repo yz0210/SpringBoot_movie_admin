@@ -19,7 +19,6 @@ public class Right {
     @TableField("authName")
     private String authName;
     private Integer cid;
-    //private Integer ccid;
     private String path;
     private Integer level;
 

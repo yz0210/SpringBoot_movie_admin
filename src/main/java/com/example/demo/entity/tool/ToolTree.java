@@ -19,7 +19,7 @@ public class ToolTree {
     private Integer ccid;
     private String path;
     private Integer level;*/
-    private List children = new ArrayList<>();
+    private List<ToolTree> children = new ArrayList<>();
 
     public ToolTree(Integer id, String authName) {
         this.id=id;

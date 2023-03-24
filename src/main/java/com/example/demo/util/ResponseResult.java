@@ -5,20 +5,6 @@ public class ResponseResult<T> {
     private String message;
     private T data;
 
-    public ResponseResult() {
-        super();
-    }
-
-    public ResponseResult(Integer status) {
-        super();
-        this.status = status;
-    }
-
-    public ResponseResult(String message) {
-        super();
-        this.message = message;
-    }
-
     public ResponseResult(Integer status, T data) {
         super();
         this.status = status;

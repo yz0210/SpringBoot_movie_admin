@@ -22,13 +22,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public List<MenuTree> findMenuTree() {
-        QueryWrapper queryWrapper = new QueryWrapper<>();//mybatis-plus的查询方法
-        //其实这里应该有个查询条件我没有加。（可以不加）
-        // queryWrapper.eq("xx","xxxx")
-
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();//mybatis-plus的查询方法
         //把查询条件加进来也可以传null
         List<Menu> list = menuMapper.selectList(queryWrapper);
-        List<MenuTree> menuTreeList = new ArrayList();
+        List<MenuTree> menuTreeList = new ArrayList<>();
         for (Menu  menu:list) {
             MenuTree menuTree = new MenuTree();
             if(menu.getCid() == 0){   //如果你的父id是String类型就equals去比较
@@ -43,7 +40,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public List<MenuTree> findMenusNextTree(List<Menu> list, Integer menuId) {
-        List<MenuTree> list1 = new ArrayList();
+        List<MenuTree> list1 = new ArrayList<>();
         for (Menu menu: list) {
             MenuTree menuTree = new MenuTree();
             if(menu.getCid().equals(menuId)){

@@ -5,13 +5,14 @@ import com.example.demo.entity.AdminEntity;
 import com.example.demo.entity.tool.PageInfo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface AdminService extends IService<AdminEntity> {
 
 
     AdminEntity getLoginResult(AdminEntity admin);
 
-    PageInfo<AdminEntity> getAdminList(Long pagenum,Long pagesize,String query);
+    PageInfo<AdminEntity> getAdminList(Long pagenum, Long pagesize, String query);
 
     AdminEntity getFindByIdResult(Serializable id);
 

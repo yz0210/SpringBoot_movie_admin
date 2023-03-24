@@ -34,7 +34,7 @@ public class RightController extends BaseController{
     }
 
     @GetMapping("tree")
-    public ResponseResult getRightTree() {
+    public ResponseResult<List<ToolTree>> getRightTree() {
         // 执行查询
         List<ToolTree> data = rightService.getRightsTree(rightService.getRightsList());
         if(Objects.isNull(data)){

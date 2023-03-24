@@ -34,9 +34,7 @@ public class MovieInfoServiceImpl extends ServiceImpl<MovieInfoMapper,MovieInfoE
         List<MovieInfoEntity> rows = page1.getRecords();
         Long total=page1.getTotal();
 
-        PageInfo pageInfo=new PageInfo(rows,query,total,pagenum,pagesize);
-        //System.out.println(pageInfo);
-        return pageInfo;
+        return new PageInfo<>(rows,query,total,pagenum,pagesize);
 
     }
 
