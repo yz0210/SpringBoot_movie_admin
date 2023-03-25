@@ -11,6 +11,6 @@ public interface AreaService extends IService<Area> {
 
     List<ToolTree> getAreaTree();
 
-    List<ToolTree> getRightsChildTree(List<Area> list, Integer id);
+    List<ToolTree> getAreaChildTree(List<Area> list, Integer id);
 
 }

@@ -1,25 +1,25 @@
 package com.example.SpringBoot_movie_admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.SpringBoot_movie_admin.entity.AdminEntity;
+import com.example.SpringBoot_movie_admin.entity.Admin;
 import com.example.SpringBoot_movie_admin.entity.tool.PageInfo;
 
 import java.io.Serializable;
 
-public interface AdminService extends IService<AdminEntity> {
+public interface AdminService extends IService<Admin> {
 
 
-    AdminEntity getLoginResult(AdminEntity admin);
+    Admin getLoginResult(Admin admin);
 
-    PageInfo<AdminEntity> getAdminList(Long pagenum, Long pagesize, String query);
+    PageInfo<Admin> getAdminList(Long pagenum, Long pagesize, String query);
 
-    AdminEntity getFindByIdResult(Serializable id);
+    Admin getFindByIdResult(Serializable id);
 
-    Integer getAddResult(AdminEntity admin);
+    Integer getAddResult(Admin admin);
 
     Integer getDelResult(int id);
 
-    Integer getUpdateResult(AdminEntity admin);
+    Integer getUpdateResult(Admin admin);
 
     Integer getUpdateRoleResult(int uid,int rid);
 

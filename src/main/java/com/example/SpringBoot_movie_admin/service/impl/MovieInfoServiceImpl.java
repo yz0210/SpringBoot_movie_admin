@@ -3,7 +3,7 @@ package com.example.SpringBoot_movie_admin.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.SpringBoot_movie_admin.entity.MovieInfoEntity;
+import com.example.SpringBoot_movie_admin.entity.MovieInfo;
 import com.example.SpringBoot_movie_admin.entity.tool.PageInfo;
 import com.example.SpringBoot_movie_admin.mapper.MovieInfoMapper;
 import com.example.SpringBoot_movie_admin.service.MovieInfoService;
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class MovieInfoServiceImpl extends ServiceImpl<MovieInfoMapper,MovieInfoEntity>
+public class MovieInfoServiceImpl extends ServiceImpl<MovieInfoMapper, MovieInfo>
         implements MovieInfoService {
 
     @Resource
@@ -24,14 +24,14 @@ public class MovieInfoServiceImpl extends ServiceImpl<MovieInfoMapper,MovieInfoE
      * 电影列表分页查询
      * */
     @Override
-    public PageInfo<MovieInfoEntity> getMovieInfoList(Long pagenum, Long pagesize,String query) {
-        Page<MovieInfoEntity> page = new Page<>(pagenum,pagesize);
+    public PageInfo<MovieInfo> getMovieInfoList(Long pagenum, Long pagesize, String query) {
+        Page<MovieInfo> page = new Page<>(pagenum,pagesize);
 
-        LambdaQueryWrapper<MovieInfoEntity> queryWrapper =new LambdaQueryWrapper<>();
-        queryWrapper.like(!query.isEmpty(),MovieInfoEntity::getName,query);
-        Page<MovieInfoEntity> page1 = page(page, queryWrapper);
+        LambdaQueryWrapper<MovieInfo> queryWrapper =new LambdaQueryWrapper<>();
+        queryWrapper.like(!query.isEmpty(), MovieInfo::getName,query);
+        Page<MovieInfo> page1 = page(page, queryWrapper);
 
-        List<MovieInfoEntity> rows = page1.getRecords();
+        List<MovieInfo> rows = page1.getRecords();
         Long total=page1.getTotal();
 
         return new PageInfo<>(rows,query,total,pagenum,pagesize);
@@ -41,7 +41,11 @@ public class MovieInfoServiceImpl extends ServiceImpl<MovieInfoMapper,MovieInfoE
 
     @Override
     public Integer getDeleteResult(Integer id) {
-
         return movieInfoMapper.deleteById(id);
+    }
+
+    @Override
+    public Integer getAddResult(MovieInfo movieInfo) {
+        return movieInfoMapper.insert(movieInfo);
     }
 }

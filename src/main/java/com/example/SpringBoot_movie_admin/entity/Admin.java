@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("movie_admin")
-public class AdminEntity {
+public class Admin {
     @TableId(value="id",type= IdType.AUTO)
     private Integer id;
     @TableField("userName")
