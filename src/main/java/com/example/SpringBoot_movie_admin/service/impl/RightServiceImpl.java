@@ -23,11 +23,8 @@ public class RightServiceImpl extends ServiceImpl<RightMapper, Right> implements
 
     @Override
     public List<Right> getRightsList() {
-        QueryWrapper<Right> queryWrapper=new QueryWrapper<>();
-        queryWrapper.select("id","authName","Cid","path","level");
-        return rightMapper.selectList(queryWrapper);
+        return rightMapper.selectList(null);
     }
-
 
 
     @Override
@@ -37,7 +34,7 @@ public class RightServiceImpl extends ServiceImpl<RightMapper, Right> implements
             ToolTree rightsTree =new ToolTree();
             if(right.getLevel()==0){
                 rightsTree.setId(right.getId());
-                rightsTree.setAuthName(right.getAuthName());
+                rightsTree.setLabel(right.getLabel());
                 rightsTree.setChildren(getRightsChildTree(list,right.getId()));
                 list1.add(rightsTree);
             }
@@ -51,9 +48,9 @@ public class RightServiceImpl extends ServiceImpl<RightMapper, Right> implements
         List<ToolTree> list2=new ArrayList<>();
         for(Right right:list){
             ToolTree rightsTree =new ToolTree();
-            if(Objects.equals(right.getCid(), id)){
+            if(Objects.equals(right.getParentId(), id)){
                 rightsTree.setId(right.getId());
-                rightsTree.setAuthName(right.getAuthName());
+                rightsTree.setLabel(right.getLabel());
                 rightsTree.setChildren(getRightsChildTree(list,right.getId()));
                 list2.add(rightsTree);
             }

@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AreaServiceTests {
+public class MovieAreaServiceTests {
 
     @Resource
     private AreaService areaService;

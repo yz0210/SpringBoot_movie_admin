@@ -24,9 +24,9 @@ public class MovieTypeServiceImpl extends ServiceImpl<MovieTypeMapper, MovieType
         List<ToolTree> list=new ArrayList<>();
         for(MovieType movieType:movieTypeList){
             ToolTree typeTree =new ToolTree();
-            if(movieType.getCid()==0){
+            if(movieType.getParentId()==0){
                 typeTree.setId(movieType.getId());
-                typeTree.setAuthName(movieType.getType());
+                typeTree.setLabel(movieType.getLabel());
                 typeTree.setChildren(getTypeChildTree(movieTypeList,movieType.getId()));
                 list.add(typeTree);
             }
@@ -39,9 +39,9 @@ public class MovieTypeServiceImpl extends ServiceImpl<MovieTypeMapper, MovieType
         List<ToolTree> list2=new ArrayList<>();
         for(MovieType movieType:list){
             ToolTree typeTree =new ToolTree();
-            if(Objects.equals(movieType.getCid(), id)){
+            if(Objects.equals(movieType.getParentId(), id)){
                 typeTree.setId(movieType.getId());
-                typeTree.setAuthName(movieType.getType());
+                typeTree.setLabel(movieType.getLabel());
                 //typeTree.setChildren(getTypeChildTree(list,movieType.getId()));
                 list2.add(typeTree);
                 //System.out.println(typeTree.toString());

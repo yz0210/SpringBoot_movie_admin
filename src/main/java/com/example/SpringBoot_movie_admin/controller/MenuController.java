@@ -1,6 +1,6 @@
 package com.example.SpringBoot_movie_admin.controller;
 
-import com.example.SpringBoot_movie_admin.entity.tool.MenuTree;
+import com.example.SpringBoot_movie_admin.entity.tool.ToolTree;
 import com.example.SpringBoot_movie_admin.service.MenuService;
 import com.example.SpringBoot_movie_admin.util.ResponseResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,9 +21,9 @@ public class MenuController extends BaseController{
 
 
     @GetMapping
-    public ResponseResult<List<MenuTree>> getMovieInfoList() {
+    public ResponseResult<List<ToolTree>> getMovieInfoList() {
         // 执行查询
-        List<MenuTree> data= menuService.findMenuTree();
+        List<ToolTree> data= menuService.findMenuTree();
         //System.out.println(data);
         return new ResponseResult<>(SUCCESS,"find success!", data);
     }

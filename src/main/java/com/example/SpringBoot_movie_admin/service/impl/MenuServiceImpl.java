@@ -1,9 +1,8 @@
 package com.example.SpringBoot_movie_admin.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.SpringBoot_movie_admin.entity.Menu;
-import com.example.SpringBoot_movie_admin.entity.tool.MenuTree;
+import com.example.SpringBoot_movie_admin.entity.tool.ToolTree;
 import com.example.SpringBoot_movie_admin.mapper.MenuMapper;
 import com.example.SpringBoot_movie_admin.service.MenuService;
 import org.springframework.beans.BeanUtils;
@@ -21,14 +20,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
 
     @Override
-    public List<MenuTree> findMenuTree() {
-        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();//mybatis-plus的查询方法
-        //把查询条件加进来也可以传null
-        List<Menu> list = menuMapper.selectList(queryWrapper);
-        List<MenuTree> menuTreeList = new ArrayList<>();
+    public List<ToolTree> findMenuTree() {
+        List<Menu> list = menuMapper.selectList(null);
+        List<ToolTree> menuTreeList = new ArrayList<>();
         for (Menu  menu:list) {
-            MenuTree menuTree = new MenuTree();
-            if(menu.getCid() == 0){   //如果你的父id是String类型就equals去比较
+            ToolTree menuTree = new ToolTree();
+            if(menu.getParentId() == 0){   //如果你的父id是String类型就equals去比较
                 BeanUtils.copyProperties(menu, menuTree);
                 menuTree.setChildren(findMenusNextTree(list,(menu.getId())));
                 menuTreeList.add(menuTree);
@@ -39,11 +36,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
 
     @Override
-    public List<MenuTree> findMenusNextTree(List<Menu> list, Integer menuId) {
-        List<MenuTree> list1 = new ArrayList<>();
+    public List<ToolTree> findMenusNextTree(List<Menu> list, Integer id) {
+        List<ToolTree> list1 = new ArrayList<>();
         for (Menu menu: list) {
-            MenuTree menuTree = new MenuTree();
-            if(menu.getCid().equals(menuId)){
+            ToolTree menuTree = new ToolTree();
+            if(menu.getParentId().equals(id)){
                 BeanUtils.copyProperties(menu,menuTree);
                 menuTree.setChildren(findMenusNextTree(list,menu.getId()));
                 list1.add(menuTree);

@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 public class Right {
     @TableId(value="id",type= IdType.AUTO)
     private Integer id;
-    @TableField("authName")
-    private String authName;
-    private Integer cid;
-    private String path;
+    private String label;//权限名字
+    @TableField("parentId")
+    private Integer parentId;
+    private String value;//权限路径
     private Integer level;
 
 

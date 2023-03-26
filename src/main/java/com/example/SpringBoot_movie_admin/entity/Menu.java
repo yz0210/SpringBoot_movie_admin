@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("movie_menu")
-public class Menu {
+public class Menu  {
     @TableId(value="id",type= IdType.AUTO)
     private Integer id;
-    private Integer cid;
-    @TableField("authName")
-    private String authName;
-    private String path;
+    @TableField("parentId")
+    private Integer parentId;
+    private String label;//目录的名字
+    private String value;//目录指向的路径
 
 }

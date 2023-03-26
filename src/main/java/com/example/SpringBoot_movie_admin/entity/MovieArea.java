@@ -1,6 +1,7 @@
 package com.example.SpringBoot_movie_admin.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -11,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("movie_area")
-public class Area {
-
+public class MovieArea {
     @TableId(value="id",type= IdType.AUTO)
     private Integer id;
-    private String value;
-    private String label;
-    private Integer cid;
+    private String value;//地区的英文名
+    private String label;//地区展示的名字
+    @TableField("parentId")
+    private Integer parentId;
 
 }

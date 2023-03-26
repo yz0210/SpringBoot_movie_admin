@@ -1,7 +1,7 @@
 package com.example.SpringBoot_movie_admin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.SpringBoot_movie_admin.entity.Area;
+import com.example.SpringBoot_movie_admin.entity.MovieArea;
 import com.example.SpringBoot_movie_admin.entity.tool.ToolTree;
 import com.example.SpringBoot_movie_admin.mapper.AreaMapper;
 import com.example.SpringBoot_movie_admin.service.AreaService;
@@ -14,20 +14,20 @@ import java.util.Objects;
 
 
 @Service
-public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements AreaService {
+public class AreaServiceImpl extends ServiceImpl<AreaMapper, MovieArea> implements AreaService {
 
     @Resource
     private AreaMapper areaMapper;
 
     @Override
     public List<ToolTree> getAreaTree() {
-        List<Area> areaList=areaMapper.selectList(null);
+        List<MovieArea> areaList=areaMapper.selectList(null);
         List<ToolTree> list=new ArrayList<>();
-        for(Area area:areaList){
+        for(MovieArea area:areaList){
             ToolTree areaTree =new ToolTree();
-            if(area.getCid()==0){
+            if(area.getParentId()==0){
                 areaTree.setId(area.getId());
-                areaTree.setAuthName(area.getLabel());
+                areaTree.setLabel(area.getLabel());
                 areaTree.setValue(area.getValue());
                 areaTree.setChildren(getAreaChildTree(areaList,area.getId()));
                 list.add(areaTree);
@@ -37,13 +37,13 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
     }
 
     @Override
-    public List<ToolTree> getAreaChildTree(List<Area> list, Integer id) {
+    public List<ToolTree> getAreaChildTree(List<MovieArea> list, Integer id) {
         List<ToolTree> list2=new ArrayList<>();
-        for(Area area:list){
+        for(MovieArea area:list){
             ToolTree areaTree =new ToolTree();
-            if(Objects.equals(area.getCid(), id)){
+            if(Objects.equals(area.getParentId(), id)){
                 areaTree.setId(area.getId());
-                areaTree.setAuthName(area.getLabel());
+                areaTree.setLabel(area.getLabel());
                 areaTree.setValue(area.getValue());
                 areaTree.setChildren(getAreaChildTree(list,area.getId()));
                 list2.add(areaTree);

@@ -14,12 +14,10 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ToolTree {
     private Integer id;
-    private String authName;
-    /*private Integer cid;
-    private Integer ccid;
-    private String path;
-    private Integer level;*/
-    private String value;//area类专用
+    private String label;
+    private String value;
+    private Integer parentId;
+    // private Integer level;
     private List<ToolTree> children = new ArrayList<>();
 
 }

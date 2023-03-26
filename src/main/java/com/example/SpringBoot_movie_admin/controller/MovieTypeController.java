@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("categories")
+@RequestMapping("type")
 @CrossOrigin
 public class MovieTypeController extends BaseController{
 

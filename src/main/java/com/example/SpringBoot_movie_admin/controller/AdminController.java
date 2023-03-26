@@ -31,7 +31,7 @@ public class AdminController extends BaseController{
     private ResponseResult<Admin> getLoginResult(@RequestBody Admin admin){
         Admin data=adminService.getLoginResult(admin);
         if(Objects.isNull(data)){
-            return new ResponseResult<>("login err!", null);
+            return new ResponseResult<>(0,"login err!", null);
         }
         return new ResponseResult<>(SUCCESS,"login success!",data);
     }
@@ -45,7 +45,7 @@ public class AdminController extends BaseController{
     private ResponseResult<Admin> getFindByIdResult(@PathVariable(value = "id") Serializable id){
         Admin data=adminService.getFindByIdResult(id);
         if(Objects.isNull(data)){
-            return new ResponseResult<>("err!", null);
+            return new ResponseResult<>(0,"err!", null);
         }
         return new ResponseResult<>(SUCCESS,"success!",data);
     }
@@ -71,9 +71,9 @@ public class AdminController extends BaseController{
     private ResponseResult<Admin> getAddResult(@RequestBody Admin admin){
         Integer resultFlag=adminService.getAddResult(admin);
         if(resultFlag<0){
-            return new ResponseResult<>("add err!", null);
+            return new ResponseResult<>(0,"add err!", null);
         }
-        return new ResponseResult<>(SUCCESS,null);
+        return new ResponseResult<>(SUCCESS,"add success",null);
     }
 
 
@@ -82,7 +82,7 @@ public class AdminController extends BaseController{
         //System.out.println(id);
         Integer resultFlag=adminService.getDelResult(id);
         if(resultFlag<0)
-            return new ResponseResult<>("del err!", null);
+            return new ResponseResult<>(0,"del err!", null);
         return new ResponseResult<>(SUCCESS,"del success!",null);
     }
 
