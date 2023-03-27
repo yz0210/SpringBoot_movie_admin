@@ -1,18 +1,18 @@
 package com.example.SpringBoot_movie_admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.SpringBoot_movie_admin.entity.Right;
+import com.example.SpringBoot_movie_admin.entity.RoleRights;
 import com.example.SpringBoot_movie_admin.entity.tool.ToolTree;
 
 import java.util.List;
 
-public interface RightService extends IService<Right> {
+public interface RightService extends IService<RoleRights> {
 
-    List<Right> getRightsList();
-
-
-    List<ToolTree> getRightsTree(List<Right> list);
+    List<RoleRights> getRightsList();
 
 
-    List<ToolTree> getRightsChildTree(List<Right> list, Integer id);
+    List<ToolTree> getRightsTree(List<RoleRights> list);
+
+
+    List<ToolTree> getRightsChildTree(List<RoleRights> list, Integer id);
 }

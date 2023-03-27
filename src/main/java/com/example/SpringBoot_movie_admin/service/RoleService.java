@@ -11,7 +11,6 @@ public interface RoleService extends IService<Role> {
 
     List<RoleInfo> getRoleList();
 
-
     Integer updateRoleRights(Integer roleId,String IdStr);
 
     Integer deleteRoleRights(Integer roleId,Integer rightId);

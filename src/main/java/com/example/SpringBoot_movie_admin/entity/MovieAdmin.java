@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("movie_area")
-public class MovieArea {
+public class MovieAdmin {
     @TableId(value="id",type= IdType.AUTO)
     private Integer id;
-    private String value;//地区的英文名
-    private String label;//地区展示的名字
-    @TableField("parentId")
-    private Integer parentId;
-
+    private String userName;
+    private String userPassword;
+    private String email;
+    private String mobile;
+    private String roleName;
+    private Boolean mgState;
 }

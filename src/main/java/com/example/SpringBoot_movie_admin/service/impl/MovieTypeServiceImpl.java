@@ -1,7 +1,8 @@
 package com.example.SpringBoot_movie_admin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.SpringBoot_movie_admin.entity.MovieType;
+import com.example.SpringBoot_movie_admin.entity.BaseEntity;
+import com.example.SpringBoot_movie_admin.entity.movieCate.MovieType;
 import com.example.SpringBoot_movie_admin.entity.tool.ToolTree;
 import com.example.SpringBoot_movie_admin.mapper.MovieTypeMapper;
 import com.example.SpringBoot_movie_admin.service.MovieTypeService;
@@ -21,6 +22,10 @@ public class MovieTypeServiceImpl extends ServiceImpl<MovieTypeMapper, MovieType
     @Override
     public List<ToolTree> getTypeTreeList() {
         List<MovieType> movieTypeList = movieTypeMapper.selectList(null);
+
+        List<BaseEntity>newList=new ArrayList<>(movieTypeList);
+        return new MovieType().getTree(newList);
+        /*
         List<ToolTree> list=new ArrayList<>();
         for(MovieType movieType:movieTypeList){
             ToolTree typeTree =new ToolTree();
@@ -31,7 +36,7 @@ public class MovieTypeServiceImpl extends ServiceImpl<MovieTypeMapper, MovieType
                 list.add(typeTree);
             }
         }
-        return list;
+        return list;*/
     }
 
     @Override

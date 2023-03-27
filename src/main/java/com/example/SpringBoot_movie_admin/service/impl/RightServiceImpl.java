@@ -1,8 +1,8 @@
 package com.example.SpringBoot_movie_admin.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.SpringBoot_movie_admin.entity.Right;
+import com.example.SpringBoot_movie_admin.entity.BaseEntity;
+import com.example.SpringBoot_movie_admin.entity.RoleRights;
 import com.example.SpringBoot_movie_admin.entity.tool.ToolTree;
 import com.example.SpringBoot_movie_admin.mapper.RightMapper;
 
@@ -16,21 +16,26 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class RightServiceImpl extends ServiceImpl<RightMapper, Right> implements RightService {
+public class RightServiceImpl extends ServiceImpl<RightMapper, RoleRights> implements RightService {
 
     @Resource
     private RightMapper rightMapper;
 
     @Override
-    public List<Right> getRightsList() {
+    public List<RoleRights> getRightsList() {
         return rightMapper.selectList(null);
     }
 
 
     @Override
-    public List<ToolTree> getRightsTree(List<Right> list) {
-        List<ToolTree> list1=new ArrayList<>();
-        for(Right right:list){
+    public List<ToolTree> getRightsTree(List<RoleRights> list) {
+
+        List<BaseEntity>newLise=new ArrayList<>(list);
+        //new RoleRights().getTree(newLise);
+        //System.out.println(new RoleRights().getTree(newLise));
+
+       /* List<ToolTree> list1=new ArrayList<>();
+        for(RoleRights right:list){
             ToolTree rightsTree =new ToolTree();
             if(right.getLevel()==0){
                 rightsTree.setId(right.getId());
@@ -39,14 +44,15 @@ public class RightServiceImpl extends ServiceImpl<RightMapper, Right> implements
                 list1.add(rightsTree);
             }
         }
-
-        return list1;
+        System.out.println(list1);
+        return list1;*/
+        return new RoleRights().getTree(newLise);
     }
 
     @Override
-    public List<ToolTree> getRightsChildTree(List<Right> list, Integer id) {
+    public List<ToolTree> getRightsChildTree(List<RoleRights> list, Integer id) {
         List<ToolTree> list2=new ArrayList<>();
-        for(Right right:list){
+        for(RoleRights right:list){
             ToolTree rightsTree =new ToolTree();
             if(Objects.equals(right.getParentId(), id)){
                 rightsTree.setId(right.getId());

@@ -1,7 +1,8 @@
 package com.example.SpringBoot_movie_admin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.SpringBoot_movie_admin.entity.MovieArea;
+import com.example.SpringBoot_movie_admin.entity.BaseEntity;
+import com.example.SpringBoot_movie_admin.entity.movieCate.MovieArea;
 import com.example.SpringBoot_movie_admin.entity.tool.ToolTree;
 import com.example.SpringBoot_movie_admin.mapper.AreaMapper;
 import com.example.SpringBoot_movie_admin.service.AreaService;
@@ -22,7 +23,10 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, MovieArea> implemen
     @Override
     public List<ToolTree> getAreaTree() {
         List<MovieArea> areaList=areaMapper.selectList(null);
-        List<ToolTree> list=new ArrayList<>();
+        List<BaseEntity>newLise=new ArrayList<>(areaList);
+
+        return new MovieArea().getTree(newLise);
+        /*List<ToolTree> list=new ArrayList<>();
         for(MovieArea area:areaList){
             ToolTree areaTree =new ToolTree();
             if(area.getParentId()==0){
@@ -33,7 +37,7 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, MovieArea> implemen
                 list.add(areaTree);
             }
         }
-        return list;
+        return list;*/
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.example.SpringBoot_movie_admin.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.SpringBoot_movie_admin.entity.Right;
+import com.example.SpringBoot_movie_admin.entity.RoleRights;
 import com.example.SpringBoot_movie_admin.entity.Role;
 import com.example.SpringBoot_movie_admin.entity.tool.RoleInfo;
 import com.example.SpringBoot_movie_admin.mapper.RightMapper;
@@ -37,7 +37,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper,Role> implements Rol
             BeanUtils.copyProperties(role, roleInfoTree); //加入角色基本信息
 
             String rightsStr=role.getRights();//获得权限id串
-            List<Right> rightList=rightMapper.selectBatchIds(Arrays.asList(rightsStr.split(",")));//获得权限表
+            List<RoleRights> rightList=rightMapper.selectBatchIds(Arrays.asList(rightsStr.split(",")));//获得权限表
 
             roleInfoTree.setChildren(rightService.getRightsTree(rightList));//加入Child
 

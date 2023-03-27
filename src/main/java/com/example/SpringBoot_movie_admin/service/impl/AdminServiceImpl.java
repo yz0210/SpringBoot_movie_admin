@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.SpringBoot_movie_admin.entity.Admin;
+import com.example.SpringBoot_movie_admin.entity.MovieAdmin;
 import com.example.SpringBoot_movie_admin.entity.tool.PageInfo;
 import com.example.SpringBoot_movie_admin.entity.Role;
 import com.example.SpringBoot_movie_admin.mapper.AdminMapper;
@@ -17,7 +17,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Service
-public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
+public class AdminServiceImpl extends ServiceImpl<AdminMapper, MovieAdmin> implements AdminService {
 
     @Resource
     private AdminMapper adminMapper;
@@ -27,22 +27,22 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
 
     @Override
-    public Admin getLoginResult(Admin admin) {
+    public MovieAdmin getLoginResult(MovieAdmin admin) {
         return adminMapper.adminLogin(admin);
     }
 
 
     @Override
-    public PageInfo<Admin> getAdminList(Long pagenum, Long pagesize, String query) {
+    public PageInfo<MovieAdmin> getAdminList(Long pagenum, Long pagesize, String query) {
         //System.out.println(query);
-        Page<Admin> page = new Page<>(pagenum, pagesize);
+        Page<MovieAdmin> page = new Page<>(pagenum, pagesize);
 
-        LambdaQueryWrapper<Admin> queryWrapper =new LambdaQueryWrapper<>();
-        queryWrapper.like(!query.isEmpty(), Admin::getUserName,query);
+        LambdaQueryWrapper<MovieAdmin> queryWrapper =new LambdaQueryWrapper<>();
+        queryWrapper.like(!query.isEmpty(), MovieAdmin::getUserName,query);
 
-        Page<Admin> page1 = page(page, queryWrapper);
+        Page<MovieAdmin> page1 = page(page, queryWrapper);
 
-        List<Admin> rows = page1.getRecords();
+        List<MovieAdmin> rows = page1.getRecords();
         Long total=page1.getTotal();
 
         //PageInfo<AdminEntity> pageInfo=new PageInfo<AdminEntity>(rows,query,total,pagenum,pagesize);
@@ -53,13 +53,13 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
-    public Admin getFindByIdResult(Serializable id) {
+    public MovieAdmin getFindByIdResult(Serializable id) {
         return adminMapper.selectById(id);
     }
 
     @Override
-    public Integer getAddResult(Admin admin) {
-        return adminMapper.addUser(admin);
+    public Integer getAddResult(MovieAdmin admin) {
+        return adminMapper.insert(admin);
     }
 
     @Override
@@ -67,8 +67,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         return adminMapper.delUser(id);
     }
 
+
     @Override
-    public Integer getUpdateResult(Admin admin) {
+    public Integer getUpdateResult(MovieAdmin admin) {
         return adminMapper.updateById(admin);
     }
 
@@ -77,22 +78,19 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
         Role role=roleMapper.selectById(rid);
         //System.out.println(role);
-
         String name=role.getName();
-
-        UpdateWrapper<Admin> updateWrapper=new UpdateWrapper<>();
+        UpdateWrapper<MovieAdmin> updateWrapper=new UpdateWrapper<>();
         updateWrapper.eq("id",uid)
                      .set("role_name",name);
-
-        return adminMapper.update(new Admin(),updateWrapper);
+        return adminMapper.update(new MovieAdmin(),updateWrapper);
     }
 
     @Override
     public Integer getUpdateStatusResult(Integer id,Boolean bool) {
-        UpdateWrapper<Admin> updateWrapper=new UpdateWrapper<>();
+        UpdateWrapper<MovieAdmin> updateWrapper=new UpdateWrapper<>();
         updateWrapper.eq("id",id)
                 .set("mg_state",bool);
-        return adminMapper.update(new Admin(),updateWrapper);
+        return adminMapper.update(new MovieAdmin(),updateWrapper);
     }
 
 

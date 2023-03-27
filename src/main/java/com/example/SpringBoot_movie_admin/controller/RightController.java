@@ -1,7 +1,7 @@
 package com.example.SpringBoot_movie_admin.controller;
 
 
-import com.example.SpringBoot_movie_admin.entity.Right;
+import com.example.SpringBoot_movie_admin.entity.RoleRights;
 import com.example.SpringBoot_movie_admin.entity.tool.ToolTree;
 import com.example.SpringBoot_movie_admin.service.RightService;
 import com.example.SpringBoot_movie_admin.util.ResponseResult;
@@ -23,9 +23,9 @@ public class RightController extends BaseController{
     private RightService rightService;
 
     @GetMapping("list")
-    public ResponseResult<List<Right>> getRightList() {
+    public ResponseResult<List<RoleRights>> getRightList() {
         // 执行查询
-        List<Right> data = rightService.getRightsList();
+        List<RoleRights> data = rightService.getRightsList();
         if(Objects.isNull(data)){
             return new ResponseResult<>(0,"err!", null);
         }

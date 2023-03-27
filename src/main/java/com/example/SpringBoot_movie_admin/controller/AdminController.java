@@ -1,6 +1,6 @@
 package com.example.SpringBoot_movie_admin.controller;
 
-import com.example.SpringBoot_movie_admin.entity.Admin;
+import com.example.SpringBoot_movie_admin.entity.MovieAdmin;
 import com.example.SpringBoot_movie_admin.entity.tool.PageInfo;
 import com.example.SpringBoot_movie_admin.entity.Role;
 import com.example.SpringBoot_movie_admin.service.AdminService;
@@ -28,8 +28,8 @@ public class AdminController extends BaseController{
      * @return new ResponseResult<>()
      */
     @PostMapping(value = "login")
-    private ResponseResult<Admin> getLoginResult(@RequestBody Admin admin){
-        Admin data=adminService.getLoginResult(admin);
+    private ResponseResult<MovieAdmin> getLoginResult(@RequestBody MovieAdmin admin){
+        MovieAdmin data=adminService.getLoginResult(admin);
         if(Objects.isNull(data)){
             return new ResponseResult<>(0,"login err!", null);
         }
@@ -42,8 +42,8 @@ public class AdminController extends BaseController{
      * @return new ResponseResult<>()
      */
     @GetMapping(value = "find/{id}")
-    private ResponseResult<Admin> getFindByIdResult(@PathVariable(value = "id") Serializable id){
-        Admin data=adminService.getFindByIdResult(id);
+    private ResponseResult<MovieAdmin> getFindByIdResult(@PathVariable(value = "id") Serializable id){
+        MovieAdmin data=adminService.getFindByIdResult(id);
         if(Objects.isNull(data)){
             return new ResponseResult<>(0,"err!", null);
         }
@@ -56,9 +56,9 @@ public class AdminController extends BaseController{
      * @return new ResponseResult<>()
      */
     @PostMapping("show")
-    public ResponseResult<PageInfo<Admin>> getAdminListResult(@RequestBody PageInfo<Null> page) {
+    public ResponseResult<PageInfo<MovieAdmin>> getAdminListResult(@RequestBody PageInfo<Null> page) {
         // 执行查询
-        PageInfo<Admin> data = adminService.getAdminList(page.getPagenum(), page.getPagesize(), page.getQuery());
+        PageInfo<MovieAdmin> data = adminService.getAdminList(page.getPagenum(), page.getPagesize(), page.getQuery());
         if(Objects.isNull(data)){
             return new ResponseResult<>(0,"err!", null);
         }
@@ -67,8 +67,9 @@ public class AdminController extends BaseController{
     }
 
 
-    @PostMapping(value = "add")
-    private ResponseResult<Admin> getAddResult(@RequestBody Admin admin){
+    @PutMapping(value = "add")
+    private ResponseResult<MovieAdmin> getAddResult(@RequestBody MovieAdmin admin){
+
         Integer resultFlag=adminService.getAddResult(admin);
         if(resultFlag<0){
             return new ResponseResult<>(0,"add err!", null);
@@ -78,7 +79,7 @@ public class AdminController extends BaseController{
 
 
     @DeleteMapping ("del/{id}")
-    private ResponseResult<List<Admin>> getDelResult(@PathVariable("id") int id){
+    private ResponseResult<List<MovieAdmin>> getDelResult(@PathVariable("id") int id){
         //System.out.println(id);
         Integer resultFlag=adminService.getDelResult(id);
         if(resultFlag<0)
@@ -88,7 +89,7 @@ public class AdminController extends BaseController{
 
 
     @PostMapping  ("update")
-    private ResponseResult<List<Admin>> getUpdateResult(@RequestBody Admin admin){
+    private ResponseResult<List<MovieAdmin>> getUpdateResult(@RequestBody MovieAdmin admin){
         //System.out.println(admin);
         Integer resultFlag=adminService.getUpdateResult(admin);
         //System.out.println(resultFlag);
@@ -98,7 +99,7 @@ public class AdminController extends BaseController{
     }
 
     @PutMapping  ("/{id}/role")
-    private ResponseResult<List<Admin>> getUpdateRoleResult(@RequestBody Role role, @PathVariable int id){
+    private ResponseResult<List<MovieAdmin>> getUpdateRoleResult(@RequestBody Role role, @PathVariable int id){
 
         int flag=adminService.getUpdateRoleResult(id,role.getId());
         if(flag<=0)
@@ -107,7 +108,7 @@ public class AdminController extends BaseController{
     }
 
     @PutMapping  ("/{id}/state/{mgState}")
-    private ResponseResult<List<Admin>> getUpdateStatusResult(@PathVariable int id, @PathVariable Boolean mgState){
+    private ResponseResult<List<MovieAdmin>> getUpdateStatusResult(@PathVariable int id, @PathVariable Boolean mgState){
 
         int flag=adminService.getUpdateStatusResult(id,mgState);
         if(flag<=0)

@@ -12,12 +12,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class ToolTree {
+public class ToolTree  {
     private Integer id;
     private String label;
     private String value;
     private Integer parentId;
-    // private Integer level;
+    private Integer level;
     private List<ToolTree> children = new ArrayList<>();
 
 }
