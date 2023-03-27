@@ -10,9 +10,6 @@ public interface RightService extends IService<RoleRights> {
 
     List<RoleRights> getRightsList();
 
-
     List<ToolTree> getRightsTree(List<RoleRights> list);
 
-
-    List<ToolTree> getRightsChildTree(List<RoleRights> list, Integer id);
 }

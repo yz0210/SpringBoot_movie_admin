@@ -23,7 +23,7 @@ public class MenuController extends BaseController{
     @GetMapping
     public ResponseResult<List<ToolTree>> getMovieInfoList() {
         // 执行查询
-        List<ToolTree> data= menuService.findMenuTree();
+        List<ToolTree> data= menuService.getMenuTree();
         //System.out.println(data);
         return new ResponseResult<>(SUCCESS,"find success!", data);
     }

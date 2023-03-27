@@ -10,6 +10,4 @@ public interface AreaService extends IService<MovieArea> {
 
     List<ToolTree> getAreaTree();
 
-    List<ToolTree> getAreaChildTree(List<MovieArea> list, Integer id);
-
 }

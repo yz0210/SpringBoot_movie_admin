@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface MovieTypeService extends IService<MovieType> {
 
-    List<ToolTree> getTypeTreeList();
+    List<ToolTree> getTypeTree();
 
-    List<ToolTree> getTypeChildTree(List<MovieType> list, Integer id);
 }
