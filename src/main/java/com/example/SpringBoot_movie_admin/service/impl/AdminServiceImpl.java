@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.SpringBoot_movie_admin.entity.MovieAdmin;
 import com.example.SpringBoot_movie_admin.entity.tool.PageInfo;
-import com.example.SpringBoot_movie_admin.entity.Role;
+import com.example.SpringBoot_movie_admin.entity.UserRole;
 import com.example.SpringBoot_movie_admin.mapper.AdminMapper;
 import com.example.SpringBoot_movie_admin.mapper.RoleMapper;
 import com.example.SpringBoot_movie_admin.service.AdminService;
@@ -49,7 +49,6 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, MovieAdmin> imple
 
         return new PageInfo<>(rows,query,total,pagenum,pagesize);
 
-
     }
 
     @Override
@@ -76,7 +75,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, MovieAdmin> imple
     @Override
     public Integer getUpdateRoleResult(int uid, int rid) {
 
-        Role role=roleMapper.selectById(rid);
+        UserRole role=roleMapper.selectById(rid);
         //System.out.println(role);
         String name=role.getName();
         UpdateWrapper<MovieAdmin> updateWrapper=new UpdateWrapper<>();
@@ -92,6 +91,5 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, MovieAdmin> imple
                 .set("mg_state",bool);
         return adminMapper.update(new MovieAdmin(),updateWrapper);
     }
-
 
 }

@@ -1,4 +1,4 @@
-package com.example.SpringBoot_movie_admin.entity.movieCate;
+package com.example.SpringBoot_movie_admin.entity.movieCates;
 
 import com.example.SpringBoot_movie_admin.entity.BaseEntity;
 

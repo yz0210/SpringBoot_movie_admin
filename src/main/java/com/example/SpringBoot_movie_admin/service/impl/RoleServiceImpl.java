@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.SpringBoot_movie_admin.entity.RoleRights;
-import com.example.SpringBoot_movie_admin.entity.Role;
+import com.example.SpringBoot_movie_admin.entity.UserRole;
 import com.example.SpringBoot_movie_admin.entity.tool.RoleInfo;
 import com.example.SpringBoot_movie_admin.mapper.RightMapper;
 import com.example.SpringBoot_movie_admin.mapper.RoleMapper;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class RoleServiceImpl extends ServiceImpl<RoleMapper,Role> implements RoleService {
+public class RoleServiceImpl extends ServiceImpl<RoleMapper, UserRole> implements RoleService {
 
     @Resource
     private RoleMapper roleMapper;
@@ -29,10 +29,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper,Role> implements Rol
 
     @Override
     public List<RoleInfo> getRoleList() {
-        List<Role> roleList =roleMapper.selectList(null);
+        List<UserRole> roleList =roleMapper.selectList(null);
         List<RoleInfo> roleInfoList=new ArrayList<>();
 
-        for(Role role:roleList){
+        for(UserRole role:roleList){
             RoleInfo roleInfoTree=new RoleInfo();
             BeanUtils.copyProperties(role, roleInfoTree); //加入角色基本信息
 
@@ -48,7 +48,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper,Role> implements Rol
 
     @Override
     public Integer updateRoleRights(Integer roleId, String IdStr) {
-        UpdateWrapper<Role> updateWrapper =new UpdateWrapper<>();
+        UpdateWrapper<UserRole> updateWrapper =new UpdateWrapper<>();
         updateWrapper.eq("id",roleId)
                 .set("rights",IdStr);
 
@@ -58,10 +58,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper,Role> implements Rol
 
     @Override
     public Integer deleteRoleRights(Integer roleId, Integer rightId) {
-        QueryWrapper<Role> queryWrapper=new QueryWrapper<>();
+        QueryWrapper<UserRole> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("id",roleId)
                 .select("rights");
-        Role role=roleMapper.selectOne(queryWrapper);
+        UserRole role=roleMapper.selectOne(queryWrapper);
         List<String> list=Arrays.asList(role.getRights().split(","));
 
         List<String> arrList = new ArrayList<>(list);

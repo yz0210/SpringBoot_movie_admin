@@ -1,5 +1,6 @@
 package com.example.SpringBoot_movie_admin.service;
 
+import com.example.SpringBoot_movie_admin.service.movieCatesService.MovieAreaService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +13,7 @@ import javax.annotation.Resource;
 public class MovieAreaServiceTests {
 
     @Resource
-    private AreaService areaService;
+    private MovieAreaService areaService;
 
     @Test
     public void getAreaTreeTest(){

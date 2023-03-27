@@ -1,6 +1,6 @@
 package com.example.SpringBoot_movie_admin.controller;
 
-import com.example.SpringBoot_movie_admin.entity.Role;
+import com.example.SpringBoot_movie_admin.entity.UserRole;
 import com.example.SpringBoot_movie_admin.entity.tool.RoleInfo;
 import com.example.SpringBoot_movie_admin.service.RoleService;
 import com.example.SpringBoot_movie_admin.util.ResponseResult;
@@ -29,7 +29,7 @@ public class RoleController extends BaseController{
 
 
     @PostMapping("/{roleId}/rights")
-    private ResponseResult<Integer> getUpdateRoleResult(@RequestBody Role role , @PathVariable Integer roleId){
+    private ResponseResult<Integer> getUpdateRoleResult(@RequestBody UserRole role , @PathVariable Integer roleId){
 
         int flag=roleService.updateRoleRights(roleId,role.getRights());
         if(flag<=0)

@@ -2,7 +2,7 @@ package com.example.SpringBoot_movie_admin.controller;
 
 import com.example.SpringBoot_movie_admin.entity.MovieAdmin;
 import com.example.SpringBoot_movie_admin.entity.tool.PageInfo;
-import com.example.SpringBoot_movie_admin.entity.Role;
+import com.example.SpringBoot_movie_admin.entity.UserRole;
 import com.example.SpringBoot_movie_admin.service.AdminService;
 import com.example.SpringBoot_movie_admin.util.ResponseResult;
 import org.apache.ibatis.jdbc.Null;
@@ -99,7 +99,7 @@ public class AdminController extends BaseController{
     }
 
     @PutMapping  ("/{id}/role")
-    private ResponseResult<List<MovieAdmin>> getUpdateRoleResult(@RequestBody Role role, @PathVariable int id){
+    private ResponseResult<List<MovieAdmin>> getUpdateRoleResult(@RequestBody UserRole role, @PathVariable int id){
 
         int flag=adminService.getUpdateRoleResult(id,role.getId());
         if(flag<=0)
