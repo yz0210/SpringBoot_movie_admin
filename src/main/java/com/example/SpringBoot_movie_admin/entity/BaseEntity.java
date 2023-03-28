@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -65,5 +66,31 @@ public class BaseEntity {
         }
         return childList;
     }
+
+    public  Object parentSubclass(Object parent,Object subclass){
+        Field[] parents = parent.getClass().getDeclaredFields();//获取所有属性
+        Field[] children = subclass.getClass().getSuperclass().getDeclaredFields();//获取父类所有属性
+        try {
+            for (Field fieldParent : parents){
+                fieldParent.setAccessible(true);
+                String nameParent = fieldParent.getName(); //获取属性的名字
+                Object valueParent = fieldParent.get(parent);//获取属性值
+                for (Field fieldChild : children){
+                    fieldChild.setAccessible(true);
+                    String nameChild = fieldChild.getName(); //获取属性的名字
+                    Object valueChild= fieldChild.get(subclass);
+                    if (nameChild.equals(nameParent)){
+                        fieldChild.set(subclass,valueParent);
+                    }
+
+                }
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return subclass;
+    }
+
+
 
 }

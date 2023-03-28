@@ -1,6 +1,7 @@
 package com.example.SpringBoot_movie_admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -28,7 +29,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, MovieAdmin> imple
 
     @Override
     public MovieAdmin getLoginResult(MovieAdmin admin) {
-        return adminMapper.adminLogin(admin);
+        QueryWrapper<MovieAdmin> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("user_name",admin.getUserName())
+                .eq("user_password",admin.getUserPassword());
+        return adminMapper.selectOne(queryWrapper);
     }
 
 
@@ -39,13 +43,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, MovieAdmin> imple
 
         LambdaQueryWrapper<MovieAdmin> queryWrapper =new LambdaQueryWrapper<>();
         queryWrapper.like(!query.isEmpty(), MovieAdmin::getUserName,query);
-
         Page<MovieAdmin> page1 = page(page, queryWrapper);
 
         List<MovieAdmin> rows = page1.getRecords();
         Long total=page1.getTotal();
-
-        //PageInfo<AdminEntity> pageInfo=new PageInfo<AdminEntity>(rows,query,total,pagenum,pagesize);
 
         return new PageInfo<>(rows,query,total,pagenum,pagesize);
 
@@ -63,7 +64,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, MovieAdmin> imple
 
     @Override
     public Integer getDelResult(int id) {
-        return adminMapper.delUser(id);
+        return adminMapper.deleteById(id);
     }
 
 

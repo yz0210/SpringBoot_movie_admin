@@ -60,4 +60,20 @@ public class MovieCateServiceImpl implements MovieCateService {
 
         return list;
     }
+
+    @Override
+    public Integer addCate(Integer cateId, BaseEntity baseEntity) {
+
+
+        if(cateId==1) return movieTypeMapper.insert((MovieType) baseEntity.parentSubclass(baseEntity,new MovieType()));
+
+        if(cateId==2)return movieAreaMapper.insert((MovieArea) baseEntity.parentSubclass(baseEntity,new MovieArea()));
+
+        if(cateId==3)return movieAgeMapper.insert((MovieAge) baseEntity.parentSubclass(baseEntity,new MovieAge()));
+
+        if(cateId==4)return movieTagMapper.insert((MovieTag) baseEntity.parentSubclass(baseEntity,new MovieTag()));
+
+        if(cateId==5)return movieSortMapper.insert((MovieSort) baseEntity.parentSubclass(baseEntity,new MovieSort()));
+        return null;
+    }
 }

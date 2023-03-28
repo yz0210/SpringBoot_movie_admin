@@ -1,5 +1,6 @@
 package com.example.SpringBoot_movie_admin.service;
 
+import com.example.SpringBoot_movie_admin.entity.BaseEntity;
 import com.example.SpringBoot_movie_admin.entity.tool.ToolTree;
 
 import java.util.List;
@@ -13,5 +14,8 @@ import java.util.List;
 public interface MovieCateService {
 
     List<ToolTree> getCateTree();
+
+    Integer addCate(Integer cateId, BaseEntity baseEntity);
+
 
 }

@@ -8,11 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdminMapper extends BaseMapper<MovieAdmin> {
 
-   MovieAdmin adminLogin(MovieAdmin admin);
-
-   Integer delUser(Integer id);
-
-
-
-
 }
