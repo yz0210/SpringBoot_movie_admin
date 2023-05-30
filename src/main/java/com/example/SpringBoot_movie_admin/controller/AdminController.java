@@ -22,6 +22,8 @@ public class AdminController extends BaseController{
     @Resource
     private AdminService adminService;
 
+
+
     /**
      *登录
      * @RequestBody  AdminEntity admin
